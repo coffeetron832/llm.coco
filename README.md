@@ -2,9 +2,9 @@
   <img src="endesarrollo.gif" width="130" alt="sticker">
 </p>
 
-# Palmer
+# Palmera
 
-Un modelo de lenguaje open source desarrollado como proyecto educativo.
+Un modelo de lenguaje de código abierto construido desde cero.
 
 Objetivos:
 
