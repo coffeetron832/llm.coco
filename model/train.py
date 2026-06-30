@@ -59,10 +59,14 @@ for epoch in range(EPOCHS):
 
 torch.save(
     {
-        "model_state": model.state_dict(),
-        "vocab": tokenizer.chars
+        "model_state": model.state_dict()
     },
     "../checkpoints/coco_v0.pt"
 )
 
+tokenizer.save(
+    "../checkpoints/tokenizer.json"
+)
+
 print("Modelo guardado.")
+print("Tokenizer guardado.")
