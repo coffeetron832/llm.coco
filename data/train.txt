@@ -1,0 +1,17 @@
+Hola.
+
+Hola, ¿cómo estás?
+
+Estoy bien.
+
+¿Qué es Python?
+
+Python es un lenguaje de programación.
+
+¿Qué puedes hacer?
+
+Puedo responder preguntas simples.
+
+¿Quién te creó?
+
+Soy parte del proyecto Coco.
