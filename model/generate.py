@@ -4,7 +4,7 @@ from tokenizer import CharacterTokenizer
 from transformer import CocoTransformer
 
 
-CHECKPOINT = "../checkpoints/palmer_v0.pt"
+CHECKPOINT = "../checkpoints/palmera_v0.pt"
 
 checkpoint = torch.load(
     CHECKPOINT,
@@ -47,4 +47,4 @@ while True:
         output[0].tolist()
     )
 
-    print(f"\nCoco: {text}")
+    print(f"\npalmera: {text}")
