@@ -4,7 +4,7 @@ from tokenizer import CharacterTokenizer
 from transformer import CocoTransformer
 
 
-CHECKPOINT = "../checkpoints/coco_v0.pt"
+CHECKPOINT = "../checkpoints/palmer_v0.pt"
 
 checkpoint = torch.load(
     CHECKPOINT,
