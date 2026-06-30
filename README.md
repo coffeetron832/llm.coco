@@ -2,7 +2,7 @@
   <img src="endesarrollo.gif" width="130" alt="sticker">
 </p>
 
-# Coco
+# Palmer
 
 Un modelo de lenguaje open source desarrollado como proyecto educativo.
 
