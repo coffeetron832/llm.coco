@@ -61,7 +61,7 @@ torch.save(
     {
         "model_state": model.state_dict()
     },
-    "../checkpoints/palmer_v0.pt"
+    "../checkpoints/palmera_v0.pt"
 )
 
 tokenizer.save(
