@@ -27,10 +27,8 @@ checkpoint = torch.load(
     map_location="cpu"
 )
 
-chars = checkpoint["vocab"]
-
-tokenizer = CharacterTokenizer(
-    "".join(chars)
+tokenizer = CharacterTokenizer.load(
+    "../checkpoints/tokenizer.json"
 )
 
 model = CocoTransformer(
