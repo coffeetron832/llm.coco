@@ -2,7 +2,7 @@
   <img src="endesarrollo.gif" width="130" alt="sticker">
 </p>
 
-# Palmera
+# Palmera AI
 
 Un modelo de lenguaje de código abierto construido desde cero.
 
