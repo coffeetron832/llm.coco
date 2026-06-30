@@ -17,8 +17,7 @@ app = Flask(
     static_url_path=""
 )
 
-CHECKPOINT_PATH = "../checkpoints/coco_v0.pt"
-
+CHECKPOINT_PATH = "../checkpoints/palmer_v0.pt"
 
 print("Cargando Coco...")
 
