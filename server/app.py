@@ -19,7 +19,7 @@ app = Flask(
 
 CHECKPOINT_PATH = "../checkpoints/palmer_v0.pt"
 
-print("Cargando Coco...")
+print("Cargando Palmer...")
 
 checkpoint = torch.load(
     CHECKPOINT_PATH,
@@ -40,7 +40,7 @@ model.load_state_dict(
 
 model.eval()
 
-print("Coco listo.")
+print("Palmer listo.")
 
 
 @app.route("/")
