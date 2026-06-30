@@ -1,6 +1,12 @@
-__pycache__/
+**pycache**/
 *.pyc
+*.pyo
+*.pyd
 
-checkpoints/
 venv/
 .env
+
+checkpoints/
+
+.DS_Store
+Thumbs.db
