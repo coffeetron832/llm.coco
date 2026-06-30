@@ -1,5 +1,5 @@
 <p align="left">
-  <img src="endesarrollo.gif" width="300" alt="sticker">
+  <img src="endesarrollo.gif" width="220" alt="sticker">
 </p>
 
 # Coco
