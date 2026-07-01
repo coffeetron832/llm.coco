@@ -8,18 +8,37 @@ class Head(nn.Module):
     def __init__(self, head_size, n_embd, block_size):
         super().__init__()
 
-        self.key = nn.Linear(n_embd, head_size, bias=False)
-        self.query = nn.Linear(n_embd, head_size, bias=False)
-        self.value = nn.Linear(n_embd, head_size, bias=False)
+        self.key = nn.Linear(
+            n_embd,
+            head_size,
+            bias=False
+        )
+
+        self.query = nn.Linear(
+            n_embd,
+            head_size,
+            bias=False
+        )
+
+        self.value = nn.Linear(
+            n_embd,
+            head_size,
+            bias=False
+        )
 
         self.register_buffer(
             "tril",
-            torch.tril(torch.ones(block_size, block_size))
+            torch.tril(
+                torch.ones(
+                    block_size,
+                    block_size
+                )
+            )
         )
 
     def forward(self, x):
 
-        B, T, C = x.shape
+        _, T, C = x.shape
 
         k = self.key(x)
         q = self.query(x)
@@ -32,7 +51,10 @@ class Head(nn.Module):
             float("-inf")
         )
 
-        wei = F.softmax(wei, dim=-1)
+        wei = F.softmax(
+            wei,
+            dim=-1
+        )
 
         v = self.value(x)
 
@@ -43,12 +65,22 @@ class Head(nn.Module):
 
 class MultiHeadAttention(nn.Module):
 
-    def __init__(self, num_heads, head_size, n_embd, block_size):
+    def __init__(
+        self,
+        num_heads,
+        head_size,
+        n_embd,
+        block_size
+    ):
         super().__init__()
 
         self.heads = nn.ModuleList(
             [
-                Head(head_size, n_embd, block_size)
+                Head(
+                    head_size,
+                    n_embd,
+                    block_size
+                )
                 for _ in range(num_heads)
             ]
         )
@@ -59,12 +91,15 @@ class MultiHeadAttention(nn.Module):
         )
 
     def forward(self, x):
+
         out = torch.cat(
-            [h(x) for h in self.heads],
+            [head(x) for head in self.heads],
             dim=-1
         )
 
-        return self.proj(out)
+        out = self.proj(out)
+
+        return out
 
 
 class FeedForward(nn.Module):
@@ -73,9 +108,15 @@ class FeedForward(nn.Module):
         super().__init__()
 
         self.net = nn.Sequential(
-            nn.Linear(n_embd, 4 * n_embd),
+            nn.Linear(
+                n_embd,
+                4 * n_embd
+            ),
             nn.ReLU(),
-            nn.Linear(4 * n_embd, n_embd)
+            nn.Linear(
+                4 * n_embd,
+                n_embd
+            )
         )
 
     def forward(self, x):
@@ -101,20 +142,32 @@ class Block(nn.Module):
             block_size
         )
 
-        self.ffwd = FeedForward(n_embd)
+        self.ffwd = FeedForward(
+            n_embd
+        )
 
-        self.ln1 = nn.LayerNorm(n_embd)
-        self.ln2 = nn.LayerNorm(n_embd)
+        self.ln1 = nn.LayerNorm(
+            n_embd
+        )
+
+        self.ln2 = nn.LayerNorm(
+            n_embd
+        )
 
     def forward(self, x):
 
-        x = x + self.sa(self.ln1(x))
-        x = x + self.ffwd(self.ln2(x))
+        x = x + self.sa(
+            self.ln1(x)
+        )
+
+        x = x + self.ffwd(
+            self.ln2(x)
+        )
 
         return x
 
 
-class CocoTransformer(nn.Module):
+class PalmeraTransformer(nn.Module):
 
     def __init__(
         self,
@@ -125,6 +178,11 @@ class CocoTransformer(nn.Module):
         n_layer=2
     ):
         super().__init__()
+
+        if n_embd % n_head != 0:
+            raise ValueError(
+                "n_embd debe ser divisible por n_head"
+            )
 
         self.block_size = block_size
 
@@ -141,29 +199,40 @@ class CocoTransformer(nn.Module):
         self.blocks = nn.Sequential(
             *[
                 Block(
-                    n_embd,
-                    n_head,
-                    block_size
+                    n_embd=n_embd,
+                    n_head=n_head,
+                    block_size=block_size
                 )
                 for _ in range(n_layer)
             ]
         )
 
-        self.ln_f = nn.LayerNorm(n_embd)
+        self.ln_f = nn.LayerNorm(
+            n_embd
+        )
 
         self.lm_head = nn.Linear(
             n_embd,
             vocab_size
         )
 
-    def forward(self, idx, targets=None):
+    def forward(
+        self,
+        idx,
+        targets=None
+    ):
 
         B, T = idx.shape
 
-        tok_emb = self.token_embedding_table(idx)
+        tok_emb = self.token_embedding_table(
+            idx
+        )
 
         pos_emb = self.position_embedding_table(
-            torch.arange(T, device=idx.device)
+            torch.arange(
+                T,
+                device=idx.device
+            )
         )
 
         x = tok_emb + pos_emb
@@ -180,8 +249,14 @@ class CocoTransformer(nn.Module):
 
             B, T, C = logits.shape
 
-            logits = logits.view(B * T, C)
-            targets = targets.view(B * T)
+            logits = logits.view(
+                B * T,
+                C
+            )
+
+            targets = targets.view(
+                B * T
+            )
 
             loss = F.cross_entropy(
                 logits,
@@ -199,9 +274,14 @@ class CocoTransformer(nn.Module):
 
         for _ in range(max_new_tokens):
 
-            idx_cond = idx[:, -self.block_size:]
+            idx_cond = idx[
+                :,
+                -self.block_size:
+            ]
 
-            logits, _ = self(idx_cond)
+            logits, _ = self(
+                idx_cond
+            )
 
             logits = logits[:, -1, :]
 
@@ -216,7 +296,10 @@ class CocoTransformer(nn.Module):
             )
 
             idx = torch.cat(
-                (idx, next_token),
+                (
+                    idx,
+                    next_token
+                ),
                 dim=1
             )
 
