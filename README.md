@@ -4,6 +4,10 @@
 
 # Palmera AI
 
+<p align="left">
+  <img src="palmerai.gif" width="130" alt="sticker">
+</p>
+
 Un modelo de lenguaje de código abierto construido desde cero.
 
 Objetivos:
