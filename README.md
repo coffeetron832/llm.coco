@@ -1,8 +1,4 @@
 <p align="left">
-  <img src="endesarrollo.gif" width="130" alt="sticker">
-</p>
-
-<p align="left">
   <img src="palmerai.gif" width="150" alt="sticker">
 </p>
 
@@ -13,3 +9,7 @@ Objetivos:
 - Entender cómo funciona un LLM.
 - Entrenar modelos desde cero.
 - Crear un chatbot funcional.
+
+<p align="left">
+  <img src="endesarrollo.gif" width="100" alt="sticker">
+</p>
