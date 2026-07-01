@@ -4,8 +4,7 @@ from torch.utils.data import DataLoader
 
 from tokenizer import CharacterTokenizer
 from dataset import TextDataset
-from transformer import CocoTransformer
-
+from transformer import PalmeraTransformer
 
 
 
@@ -27,7 +26,7 @@ loader = DataLoader(
     shuffle=True
 )
 
-model = CocoTransformer(
+model = PalmeraTransformer(
     vocab_size=tokenizer.vocab_size,
     block_size=BLOCK_SIZE
 )
