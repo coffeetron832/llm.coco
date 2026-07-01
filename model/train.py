@@ -1,4 +1,5 @@
 import torch
+from config import *
 from torch.utils.data import DataLoader
 
 from tokenizer import CharacterTokenizer
@@ -6,13 +7,9 @@ from dataset import TextDataset
 from transformer import CocoTransformer
 
 
-BATCH_SIZE = 32
-EPOCHS = 10
-BLOCK_SIZE = 64
-LR = 3e-4
 
 
-with open("../data/train.txt", "r", encoding="utf-8") as f:
+with open(TRAIN_FILE, "r", encoding="utf-8") as f:
     text = f.read()
 
 
@@ -37,7 +34,7 @@ model = CocoTransformer(
 
 optimizer = torch.optim.AdamW(
     model.parameters(),
-    lr=LR
+    lr=LEARNING_RATE
 )
 
 for epoch in range(EPOCHS):
@@ -61,11 +58,11 @@ torch.save(
     {
         "model_state": model.state_dict()
     },
-    "../checkpoints/palmera_v0.pt"
+    CHECKPOINT_PATH
 )
 
 tokenizer.save(
-    "../checkpoints/tokenizer.json"
+    TOKENIZER_PATH
 )
 
 print("Modelo guardado.")
