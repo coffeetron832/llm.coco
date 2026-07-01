@@ -1,10 +1,11 @@
 import torch
 
+from config import *
 from tokenizer import CharacterTokenizer
 from transformer import CocoTransformer
 
 
-CHECKPOINT = "../checkpoints/palmera_v0.pt"
+CHECKPOINT = CHECKPOINT_PATH
 
 checkpoint = torch.load(
     CHECKPOINT,
@@ -12,7 +13,7 @@ checkpoint = torch.load(
 )
 
 tokenizer = CharacterTokenizer.load(
-    "../checkpoints/tokenizer.json"
+    TOKENIZER_PATH
 )
 
 model = CocoTransformer(
