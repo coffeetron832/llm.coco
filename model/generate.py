@@ -2,8 +2,7 @@ import torch
 
 from config import *
 from tokenizer import CharacterTokenizer
-from transformer import CocoTransformer
-
+from transformer import PalmeraTransformer
 
 CHECKPOINT = CHECKPOINT_PATH
 
@@ -16,7 +15,7 @@ tokenizer = CharacterTokenizer.load(
     TOKENIZER_PATH
 )
 
-model = CocoTransformer(
+model = PalmeraTransformer(
     vocab_size=tokenizer.vocab_size
 )
 
