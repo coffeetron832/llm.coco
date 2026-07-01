@@ -1,3 +1,4 @@
+from config import *
 from flask import Flask, request, jsonify
 from flask import send_from_directory
 
@@ -27,7 +28,7 @@ checkpoint = torch.load(
 )
 
 tokenizer = CharacterTokenizer.load(
-    "../checkpoints/tokenizer.json"
+    TOKENIZER_PATH
 )
 
 model = CocoTransformer(
