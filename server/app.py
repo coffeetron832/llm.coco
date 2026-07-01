@@ -9,8 +9,7 @@ import sys
 sys.path.append("../model")
 
 from tokenizer import CharacterTokenizer
-from transformer import CocoTransformer
-
+from transformer import PalmeraTransformer
 
 app = Flask(
     __name__,
@@ -31,7 +30,7 @@ tokenizer = CharacterTokenizer.load(
     TOKENIZER_PATH
 )
 
-model = CocoTransformer(
+model = PalmeraTransformer(
     vocab_size=tokenizer.vocab_size
 )
 
